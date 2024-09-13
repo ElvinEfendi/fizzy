@@ -1,5 +1,5 @@
 class BoostsController < ApplicationController
-  before_action :set_bubble
+  include BubbleScoped
 
   def index
   end
@@ -10,9 +10,4 @@ class BoostsController < ApplicationController
   def create
     @bubble.boosts.create!
   end
-
-  private
-    def set_bubble
-      @bubble = Bubble.find(params[:bubble_id])
-    end
 end

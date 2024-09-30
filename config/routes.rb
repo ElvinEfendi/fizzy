@@ -1,6 +1,8 @@
 Rails.application.routes.draw do
   root "buckets#index"
 
+  resource :first_run
+
   resource :session
 
   resource :account do

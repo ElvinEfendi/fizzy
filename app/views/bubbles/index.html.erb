@@ -92,7 +92,7 @@
       </h2>
     </header>
 
-    <%= button_to bucket_bubbles_path(@bucket), method: :post, params: { bubble: { title: "Untitled"} }, class: "btn btn--plain", form_class: "flex-item-justify-end" do %>
+    <%= button_to bucket_bubbles_path(@bucket), method: :post, class: "btn btn--plain", form_class: "flex-item-justify-end" do %>
       <%= image_tag "bubble-add.svg", aria: { hidden: true }, size: 24 %>
       <span class="for-screen-reader">Create a new bubble</span>
     <% end %>

@@ -45,6 +45,6 @@ class BubblesController < ApplicationController
     end
 
     def bubble_params
-      params.require(:bubble).permit(:title, :color, :due_on, :image, tag_ids: [])
+      params.fetch(:bubble, {}).permit(:title, :color, :due_on, :image, tag_ids: [])
     end
 end

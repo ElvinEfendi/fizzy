@@ -9,10 +9,12 @@ class Bubble < ApplicationRecord
 
   has_one_attached :image, dependent: :purge_later
 
+  searchable_by :title, using: :bubbles_search_index
+
+  before_save :set_default_title
+
   scope :reverse_chronologically, -> { order(created_at: :desc, id: :desc) }
   scope :ordered_by_activity, -> { left_joins(:comments, :boosts).group(:id).order(Arel.sql("COUNT(comments.id) + COUNT(boosts.id) DESC")) }
-
-  searchable_by :title, using: :bubbles_search_index
 
   scope :mentioning, ->(query) do
     bubbles = search(query).select(:id).to_sql
@@ -22,4 +24,9 @@ class Bubble < ApplicationRecord
       .where("bubbles.id in (#{bubbles}) or comments.bubble_id in (#{comments})")
       .distinct
   end
+
+  private
+    def set_default_title
+      self.title = title.presence || "Untitled"
+    end
 end

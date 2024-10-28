@@ -3,17 +3,17 @@ module FiltersHelper
     (Bucket::View::ORDERS[params[:order_by]] || Bucket::View::STATUSES[params[:status]] || Bubble.default_order_by).humanize
   end
 
-  def tag_filter_text
-    if @filter&.tags
-      @filter.tags.map(&:hashtag).to_choice_sentence
+  def tag_filter_text(filter)
+    if filter.tags
+      filter.tags.map(&:hashtag).to_choice_sentence
     else
       "any tag"
     end
   end
 
-  def assignee_filter_text
-    if @filter&.assignees
-      "assigned to #{@filter.assignees.pluck(:name).to_choice_sentence}"
+  def assignee_filter_text(filter)
+    if filter.assignees
+      "assigned to #{filter.assignees.pluck(:name).to_choice_sentence}"
     else
       "assigned to anyone"
     end

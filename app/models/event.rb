@@ -1,5 +1,5 @@
 class Event < ApplicationRecord
-  include Assignments, Comment, Stages
+  include Particulars
 
   belongs_to :creator, class_name: "User"
   belongs_to :summary, touch: true, class_name: "EventSummary"

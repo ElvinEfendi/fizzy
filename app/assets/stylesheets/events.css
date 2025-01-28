@@ -54,7 +54,8 @@
 }
 
 .event-grid-time {
-  position: relative;
+  display: grid;
+  place-items: center;
 
   time {
     align-items: center;
@@ -64,11 +65,8 @@
     font-size: var(--text-small);
     font-weight: 600;
     inline-size: max-content;
-    margin: 0 auto;
     padding: 0 var(--inline-space-double);
-    position: absolute;
     text-transform: uppercase;
-    transform: translate(-50%, 0);
   }
 }
 

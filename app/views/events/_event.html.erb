@@ -20,7 +20,7 @@
     </strong>
 
     <% if event.action == "commented" && !strip_tags(event&.comment&.body_html).blank? %>
-      <span class="txt-break overflow-line-clamp">
+      <span class="txt-break overflow-line-clamp txt-tight-lines">
         <%= strip_tags(event.comment.body_html).truncate(200) -%>
       </span>
     <% end %>

@@ -4,25 +4,31 @@ module Bubble::Engageable
   included do
     has_one :engagement, dependent: :destroy, class_name: "Bubble::Engagement"
 
-    scope :doing, -> { joins(:engagement) }
-    scope :considering, -> { where.missing(:engagement) }
+    scope :doing, -> { active.joins(:engagement) }
+    scope :considering, -> { active.where.missing(:engagement) }
   end
 
   def doing?
-    engagement.present?
+    active? && engagement.present?
   end
 
   def considering?
-    !doing?
+    active? && !doing?
   end
 
   def engage
     unless doing?
-      create_engagement!
+      transaction do
+        unpop
+        create_engagement!
+      end
     end
   end
 
   def reconsider
-    engagement&.destroy
+    transaction do
+      unpop
+      engagement&.destroy
+    end
   end
 end

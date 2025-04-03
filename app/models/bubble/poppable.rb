@@ -28,6 +28,10 @@ module Bubble::Poppable
     pop.present?
   end
 
+  def active?
+    !popped?
+  end
+
   def popped_by
     pop&.user
   end

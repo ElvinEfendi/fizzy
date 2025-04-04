@@ -33,8 +33,8 @@
 
       <% if bubble.considering? %>
         <%= button_to bucket_bubble_engagement_path(bubble.bucket, bubble), method: :post, class: "card__move-button card__hide-on-index btn btn--reversed" do %>
-          <%= icon_tag "menu" %>
           <span class="txt-nowrap">Move to Doing</span>
+          <%= icon_tag "assigned" %>
         <% end %>
       <% end %>
     </div>

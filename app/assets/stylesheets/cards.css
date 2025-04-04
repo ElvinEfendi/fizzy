@@ -361,12 +361,10 @@
 
 .card__move-button {
   --btn-background: color-mix(in srgb, var(--bubble-color) 40%, var(--color-ink));
-  --btn-border-radius: 0.2em;
 
   margin-block-start: calc(var(--block-space) * 1.2);
   margin-inline-end: calc(var(--inline-space) * -4);
-  padding-inline-start: var(--inline-space);
-  transform: skewX(-15deg);
+  padding-inline-end: var(--inline-space);
 }
 
 .card__stages {

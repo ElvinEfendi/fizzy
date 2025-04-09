@@ -420,16 +420,6 @@ columns:
   - *23
   - !ruby/object:ActiveRecord::ConnectionAdapters::SQLite3::Column
     auto_increment:
-    name: color
-    cast_type: *7
-    sql_type_metadata: *8
-    'null': true
-    default:
-    default_function:
-    collation:
-    comment:
-  - !ruby/object:ActiveRecord::ConnectionAdapters::SQLite3::Column
-    auto_increment:
     name: comments_count
     cast_type: *1
     sql_type_metadata: *2
@@ -962,6 +952,16 @@ columns:
     cast_type: *1
     sql_type_metadata: *2
     'null': false
+    default:
+    default_function:
+    collation:
+    comment:
+  - !ruby/object:ActiveRecord::ConnectionAdapters::SQLite3::Column
+    auto_increment:
+    name: color
+    cast_type: *7
+    sql_type_metadata: *8
+    'null': true
     default:
     default_function:
     collation:
@@ -2140,4 +2140,4 @@ indexes:
     nulls_not_distinct:
     comment:
     valid: true
-version: 20250409043626
+version: 20250409201424

@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema[8.1].define(version: 2025_04_09_043626) do
+ActiveRecord::Schema[8.1].define(version: 2025_04_09_201424) do
   create_table "accesses", force: :cascade do |t|
     t.integer "collection_id", null: false
     t.datetime "created_at", null: false
@@ -108,7 +108,6 @@ ActiveRecord::Schema[8.1].define(version: 2025_04_09_043626) do
     t.float "activity_score_order", default: 0.0, null: false
     t.integer "boosts_count", default: 0, null: false
     t.integer "collection_id", null: false
-    t.string "color"
     t.integer "comments_count", default: 0, null: false
     t.datetime "created_at", null: false
     t.integer "creator_id", null: false
@@ -316,6 +315,7 @@ ActiveRecord::Schema[8.1].define(version: 2025_04_09_043626) do
   end
 
   create_table "workflow_stages", force: :cascade do |t|
+    t.string "color"
     t.datetime "created_at", null: false
     t.string "name", null: false
     t.datetime "updated_at", null: false

@@ -18,6 +18,23 @@ class Comment < ApplicationRecord
     card_comments.many? && card_comments_prior.last&.creator != creator
   end
 
+  def created_via(message)
+    message.card.tap do |card|
+      card.increment! :comments_count
+      card.watch_by creator
+
+      card.track_event :commented, comment_id: id
+      card.rescore
+    end
+  end
+
+  def destroyed_via(message)
+    message.card.tap do |card|
+      card.decrement! :comments_count
+      card.rescore
+    end
+  end
+
   def to_partial_path
     "cards/#{super}"
   end

@@ -5,15 +5,6 @@ class Message < ApplicationRecord
 
   scope :chronologically, -> { order created_at: :asc, id: :desc }
 
-  after_create :created
-  after_destroy :destroyed
-
-  private
-    def created
-      card.comment_created(comment) if comment?
-    end
-
-    def destroyed
-      card.comment_destroyed if comment?
-    end
+  after_create  -> { messageable.created_via(self) }
+  after_destroy -> { messageable.destroyed_via(self) }
 end

@@ -1,5 +1,5 @@
 class Card < ApplicationRecord
-  include Assignable, Boostable, Colored, Commentable, Engageable, Eventable, Golden,
+  include Assignable, Boostable, Colored, Engageable, Eventable, Golden,
     Messages, Notifiable, Pinnable, Closeable, Scorable, Searchable, Staged,
     Statuses, Taggable, Watchable
 
@@ -18,6 +18,7 @@ class Card < ApplicationRecord
   scope :chronologically, -> { order created_at: :asc, id: :asc }
   scope :latest, -> { order updated_at: :desc, id: :desc }
   scope :in_collection, ->(collection) { where collection: collection }
+  scope :ordered_by_comments, -> { order comments_count: :desc }
 
   scope :indexed_by, ->(index) do
     case index

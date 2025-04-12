@@ -10,25 +10,25 @@ class Comment < ApplicationRecord
   # FIXME: Not a fan of this. Think all references to comment should come directly from the message.
   scope :belonging_to_card, ->(card) { joins(:message).where(messages: { card_id: card.id }) }
 
-  before_destroy :cleanup_events
   after_create_commit :creator_watches_card, :track_commenting_on_card
+  before_destroy :cleanup_events
 
   def to_partial_path
     "cards/#{super}"
   end
 
   private
-    # FIXME: This isn't right. We need to introduce an eventable polymorphic association for this.
-    def cleanup_events
-      # Delete events that reference directly in particulars
-      Event.where(particulars: { comment_id: id }).destroy_all
-    end
-
     def creator_watches_card
       card.watch_by creator
     end
 
     def track_commenting_on_card
       card.track_event :commented, comment_id: id
+    end
+
+    # FIXME: This isn't right. We need to introduce an eventable polymorphic association for this.
+    def cleanup_events
+      # Delete events that reference directly in particulars
+      Event.where(particulars: { comment_id: id }).destroy_all
     end
 end

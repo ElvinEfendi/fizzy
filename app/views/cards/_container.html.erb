@@ -1,9 +1,9 @@
 <section id="<%= dom_id(card, :card_container) %>" class="card-perma <%= "card-perma--pointing" unless card.published? %>" style="--card-color: <%= card.color %>;">
-  <%= render "cards/engagement", card: card %>
+  <%= render "cards/container/engagement", card: card %>
 
   <aside class="card-perma__actions card-perma__actions--left" role="toolbar">
-    <%= render "cards/gild", card: card if card.doing? %>
-    <%= render "cards/image", card: card %>
+    <%= render "cards/container/gild", card: card if card.doing? %>
+    <%= render "cards/container/image", card: card %>
     <%= button_to collection_card_path(card.collection, card),
           method: :delete, class: "btn", data: { turbo_confirm: "Are you sure you want to delete this?" } do %>
       <%= icon_tag "trash" %> <span class="for-screen-reader">Delete</span>
@@ -22,6 +22,6 @@
   <% end %>
 
   <% unless card.drafted? || card.creating? %>
-    <%= render "cards/closure", card: card %>
+    <%= render "cards/container/closure", card: card %>
   <% end %>
 </section>

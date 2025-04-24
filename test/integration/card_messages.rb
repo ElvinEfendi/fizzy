@@ -24,6 +24,6 @@ class CardMessagesTest < ActionDispatch::IntegrationTest
     assert_equal 3, card.messages.count
     assert_predicate card.messages.last, :event_summary?
     assert_equal 1, card.messages.last.event_summary.events.count
-    assert_equal "assigned", card.messages.last.messageable.events.last.action
+    assert_equal "card_assigned", card.messages.last.messageable.events.last.action
   end
 end

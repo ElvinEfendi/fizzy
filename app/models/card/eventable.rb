@@ -31,18 +31,18 @@ module Card::Eventable
     def track_due_date_change
       if due_on.present?
         if due_on_before_last_save.nil?
-          track_event("due_date_added", particulars: { due_date: due_on })
+          track_event("card_due_date_added", particulars: { due_date: due_on })
         else
-          track_event("due_date_changed", particulars: { due_date: due_on })
+          track_event("card_due_date_changed", particulars: { due_date: due_on })
         end
       elsif due_on_before_last_save.present?
-        track_event("due_date_removed")
+        track_event("card_due_date_removed")
       end
     end
 
     def track_title_change
       if title_before_last_save.present?
-        track_event "title_changed", particulars: { old_title: title_before_last_save, new_title: title }
+        track_event "card_title_changed", particulars: { old_title: title_before_last_save, new_title: title }
       end
     end
 end

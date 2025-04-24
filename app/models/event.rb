@@ -24,6 +24,6 @@ class Event < ApplicationRecord
 
   # TODO: This doesn't belong here anymore
   def initial_assignment?
-    action == "published" && eventable.assigned_to?(creator)
+    action == "card_published" && eventable.assigned_to?(creator)
   end
 end

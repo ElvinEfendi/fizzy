@@ -25,14 +25,14 @@ class CardTest < ActiveSupport::TestCase
       cards(:logo).toggle_assignment users(:kevin)
     end
     assert_not cards(:logo).assigned_to?(users(:kevin))
-    assert_equal "unassigned", Event.last.action
+    assert_equal "card_unassigned", Event.last.action
     assert_equal [ users(:kevin) ], Event.last.assignees
 
     assert_difference %w[ cards(:logo).assignees.count Event.count ], +1 do
       cards(:logo).toggle_assignment users(:kevin)
     end
     assert cards(:logo).assigned_to?(users(:kevin))
-    assert_equal "assigned", Event.last.action
+    assert_equal "card_assigned", Event.last.action
     assert_equal [ users(:kevin) ], Event.last.assignees
   end
 
@@ -74,7 +74,7 @@ class CardTest < ActiveSupport::TestCase
     assert_equal cards(:logo, :layout, :text), Card.open
   end
 
-  test "unassigned" do
+  test "card_unassigned" do
     assert_equal cards(:shipping, :text), Card.unassigned
   end
 

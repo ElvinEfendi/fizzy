@@ -2,7 +2,7 @@ logo_published:
   creator: david
   collection: writebook
   eventable: logo (Card)
-  action: published
+  action: card_published
   summary: logo_initial_activity
   created_at: <%= 1.week.ago %>
 
@@ -10,7 +10,7 @@ logo_assignment_jz:
   creator: david
   collection: writebook
   eventable: logo (Card)
-  action: assigned
+  action: card_assigned
   summary: logo_initial_activity
   particulars: <%= { assignee_ids: [ ActiveRecord::FixtureSet.identify(:jz) ] }.to_json %>
   created_at: <%= 1.week.ago + 1.hour %>
@@ -19,7 +19,7 @@ logo_assignment_km:
   creator: david
   collection: writebook
   eventable: logo (Card)
-  action: assigned
+  action: card_assigned
   summary: logo_second_activity
   particulars: <%= { assignee_ids: [ ActiveRecord::FixtureSet.identify(:kevin) ] }.to_json %>
   created_at: <%= 1.day.ago %>
@@ -28,7 +28,7 @@ layout_published:
   creator: david
   collection: writebook
   eventable: layout (Card)
-  action: published
+  action: card_published
   summary: layout_initial_activity
   created_at: <%= 1.week.ago %>
 
@@ -36,7 +36,7 @@ layout_commented:
   creator: david
   collection: writebook
   eventable: layout (Card)
-  action: commented
+  action: card_commented
   summary: layout_initial_activity
   particulars: <%= { comment_id: ActiveRecord::FixtureSet.identify(:layout_overflowing_david) }.to_json %>
   created_at: <%= 1.week.ago %>
@@ -45,7 +45,7 @@ layout_assignment_jz:
   creator: david
   collection: writebook
   eventable: layout (Card)
-  action: assigned
+  action: card_assigned
   summary: layout_initial_activity
   particulars: <%= { assignee_ids: [ ActiveRecord::FixtureSet.identify(:jz) ] }.to_json %>
   created_at: <%= 1.hour.ago %>
@@ -54,7 +54,7 @@ text_published:
   creator: kevin
   collection: writebook
   eventable: text (Card)
-  action: published
+  action: card_published
   summary: text_initial_activity
   created_at: <%= 1.week.ago %>
 
@@ -62,7 +62,7 @@ shipping_published:
   creator: kevin
   collection: writebook
   eventable: shipping (Card)
-  action: published
+  action: card_published
   summary: shipping_initial_activity
   created_at: <%= 1.week.ago %>
 
@@ -70,6 +70,6 @@ shipping_closed:
   creator: kevin
   collection: writebook
   eventable: shipping (Card)
-  action: closed
+  action: card_closed
   summary: shipping_initial_activity
   created_at: <%= 2.days.ago %>

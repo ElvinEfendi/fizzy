@@ -7,7 +7,7 @@ module Eventable
 
   def track_event(action, creator: Current.user, collection: self.collection, **particulars)
     if should_track_event?
-      collection.events.create!(action:, creator:, collection:, eventable: self, particulars:)
+      collection.events.create!(action: "#{eventable_prefix}_#{action}", creator:, collection:, eventable: self, particulars:)
     end
   end
 
@@ -17,5 +17,9 @@ module Eventable
   private
     def should_track_event?
       true
+    end
+
+    def eventable_prefix
+      self.class.name.demodulize.underscore
     end
 end

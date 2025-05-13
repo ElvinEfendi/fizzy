@@ -73,7 +73,10 @@ class Command::ChatQuery < Command
 
        ## How to filter cards
 
-       - Find cards closed by someone with: (1) /search with indexed_by=closed and an additional "/insight closed by [name]".
+       - Find cards closed by someone with: (1) /search with indexed_by=closed and assignee_id=someone".
+       - When asking for assigned cards, use assignee_ids not assignment_status.
+       - If it's not clear what the user is asking for, perform a /search passing the original query as terms. E.g: for
+         "red car" add { command: "/search", terms: ["red", "car"] }. 
 
        ## JSON format
 
@@ -98,6 +101,7 @@ class Command::ChatQuery < Command
         * The response can't contain more than one /search command.
         * The response can't contain more than one /insight command.
         * An unassigned card is a card without assignees.
+        * Never create a /search or /insight without additional params.
         * An unassigned card can be closed or not. "unassigned" and "closed" are different unrelated concepts.
         * Only use assignment_status asking for unassigned cards. Never use in other circumstances.
         * There are similar commands to filter and act on cards (e.g: filter by assignee or assign 

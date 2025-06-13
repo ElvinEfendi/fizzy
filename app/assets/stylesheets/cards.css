@@ -68,7 +68,7 @@
     margin-inline-start: calc(-1 * var(--card-padding-inline));
     max-inline-size: 100%;
     min-inline-size: 0;
-    overflow: hidden;
+    overflow: visible;
   }
 
   .card__collection {

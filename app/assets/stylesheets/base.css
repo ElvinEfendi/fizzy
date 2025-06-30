@@ -37,12 +37,17 @@
   }
 
   :is(a, button, input, textarea, .switch, .btn) {
-    --outline-size: max(2px, 0.08em);
+    --outline-size: 2px;
 
     caret-color: var(--color-link);
     text-decoration: none;
     touch-action: manipulation;
-    transition: box-shadow 150ms ease, outline-offset 150ms ease, background-color 150ms ease, opacity 150ms ease, filter 150ms ease;
+    transition:
+      box-shadow 150ms ease,
+      outline-offset 150ms ease,
+      background-color 150ms ease,
+      opacity 150ms ease,
+      filter 150ms ease;
 
     /* Hover */
     @media (any-hover: hover) {
@@ -53,8 +58,8 @@
 
     /* Keyboard navigation */
     &:where(:not(:active)):focus-visible {
-      outline-width: var(--outline-size);
       outline-color: var(--outline-color, currentColor);
+      outline-width: var(--outline-size);
       outline-offset: var(--outline-offset, calc(var(--outline-size) * 2));
     }
 

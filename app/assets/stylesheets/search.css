@@ -107,6 +107,7 @@
   }
 
   .search__excerpt--comment {
+    --avatar-size: var(--comment-avatar-size);
     --comment-avatar-size: 32px;
     --padding: 1ch;
 
@@ -118,9 +119,6 @@
     padding-block: 0.5ch;
 
     .avatar {
-      --avatar-size: var(--comment-avatar-size);
-
-      background: tomato;
       margin-left: calc(-0.5 * var(--comment-avatar-size));
     }
   }

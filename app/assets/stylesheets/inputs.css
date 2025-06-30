@@ -76,7 +76,6 @@
     }
 
     &:is(.avatar) {
-      img,
       input[type="file"] {
         border-radius: 50%;
       }

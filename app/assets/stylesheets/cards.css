@@ -3,6 +3,7 @@
   /* -------------------------------------------------------------------------- */
 
   .card {
+    --avatar-size: 2.75em;
     --card-padding-inline: var(--inline-space-double);
     --card-padding-block: var(--block-space);
     --border-color: transparent;
@@ -21,10 +22,6 @@
     position: relative;
     text-align: start;
     z-index: 1;
-
-    .avatar {
-      --avatar-size: 2.75em;
-    }
 
     @media (prefers-color-scheme: dark) {
       box-shadow: 0 0 0 1px var(--color-ink-lighter);
@@ -219,6 +216,12 @@
     margin-block-start: calc(var(--block-space) * 1.2);
     margin-inline-end: calc(var(--inline-space) * -4);
     padding-inline-end: var(--inline-space);
+  }
+
+  .card__footer {
+    .avatar + .avatar {
+      margin-inline-start: -0.8em;
+    }
   }
 
   .card__meta {

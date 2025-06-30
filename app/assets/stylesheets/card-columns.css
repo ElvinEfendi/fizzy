@@ -164,16 +164,12 @@
     }
 
     .card {
+      --avatar-size: 2.75em;
       --text-xx-large: 1.6em;
       --text-small: 1.1em;
 
       background-color: var(--color-canvas);
       line-height: 1.2;
-
-      .avatar {
-        block-size: 2.75em;
-        inline-size: 2.75em;
-      }
     }
 
     .card__body {

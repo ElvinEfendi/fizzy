@@ -1,4 +1,9 @@
 .users-list {
   max-block-size: 40dvh;
   overflow: auto;
+  padding-block: 1ch;
+
+  li + li {
+    margin-block-start: 1ch;
+  }
 }

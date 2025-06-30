@@ -1,28 +1,33 @@
 @layer components {
   .avatar {
     --avatar-border-radius: 50%;
+    --avatar-size-default: 5ch;
+      --btn-border-size: 0;
+      --hover-size: 0;
 
     aspect-ratio: 1;
-    block-size: var(--avatar-size, 5ch);
+    block-size: var(--avatar-size, var(--avatar-size-default));
     border-radius: var(--avatar-border-radius);
     display: grid;
-    inline-size: var(--avatar-size, 5ch);
+    flex-shrink: 0;
+    inline-size: var(--avatar-size, var(--avatar-size-default));
     margin: 0;
     place-items: center;
 
-    img,
-    .icon {
+    :is(img, .icon) {
       aspect-ratio: 1;
       block-size: auto;
       border-radius: var(--avatar-border-radius);
       grid-area: 1/1;
-      inline-size: var(--avatar-size, 5ch);
+      inline-size: var(--avatar-size, var(--avatar-size-default));
       max-inline-size: 100%;
       object-fit: cover;
     }
 
-    .card & + .avatar {
-      margin-inline-start: -0.8em;
+    &:where(a):not(:active):hover {
+      @media (any-hover: hover) {
+        filter: brightness(0.7);
+      }
     }
   }
 

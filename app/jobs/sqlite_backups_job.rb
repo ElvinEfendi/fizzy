@@ -92,7 +92,7 @@ class SQLiteBackupsJob < ApplicationJob
     end
 
     def db_path(tenant)
-      db_config.database
+      db_config.database_path
     end
 
     def db_config

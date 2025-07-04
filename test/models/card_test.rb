@@ -140,4 +140,27 @@ class CardTest < ActiveSupport::TestCase
     card.update!(collection: collection)
     assert_includes collection.users.reload, assignee
   end
+
+  test "move_to moves events to new collection" do
+    card = cards(:logo)
+    old_collection = collections(:writebook)
+    new_collection = collections(:private)
+
+    assert_equal old_collection, card.collection
+
+    assert card.events.where(collection: old_collection).exists?
+
+    card.move_to(new_collection)
+
+    assert_equal new_collection, card.reload.collection
+
+    events_in_old_collection = card.events.where(collection: old_collection)
+    events_in_new_collection = card.events.where(collection: new_collection)
+
+    assert_empty events_in_old_collection
+    assert events_in_new_collection.exists?
+
+    collection_changed_event = events_in_new_collection.find { |event| event.action == "card_collection_changed" }
+    assert collection_changed_event
+  end
 end

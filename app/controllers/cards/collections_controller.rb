@@ -1,9 +1,9 @@
-module Cards
-  class CollectionsController < ApplicationController
-    def update
-      @card = Card.find(params[:card_id])
-      @card.update!(collection_id: params[:collection_id])
-      redirect_to @card
-    end
+class Cards::CollectionsController < ApplicationController
+  include CollectionScoped
+
+  def update
+    @card = Current.user.accessible_cards.find(params[:card_id])
+    @card.move_to(@collection)
+    redirect_to @card
   end
 end

@@ -38,6 +38,13 @@ class Card < ApplicationRecord
     self
   end
 
+  def move_to(new_collection)
+    transaction do
+      card.update!(collection: new_collection)
+      card.events.update_all(collection_id: new_collection.id)
+    end
+  end
+
   private
     def set_default_title
       self.title = "Untitled" if title.blank?

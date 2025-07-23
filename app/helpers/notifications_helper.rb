@@ -41,11 +41,11 @@ module NotificationsHelper
       button_to read_notification_path(notification),
           method: :delete,
           class: "card__notification-unread-indicator btn btn--circle borderless",
-          title: "Mark as unseen",
+          title: "Mark as unread",
           data: { action: "form#submit:stop", form_target: "submit" },
           form: { data: { controller: "form" } } do
         concat(icon_tag("unseen"))
-        concat(tag.span("Mark as unseen", class: "for-screen-reader"))
+        concat(tag.span("Mark as unread", class: "for-screen-reader"))
       end
     else
       button_to read_notification_path(notification),

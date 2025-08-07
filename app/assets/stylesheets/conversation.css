@@ -13,13 +13,13 @@
     padding: var(--block-space-half) var(--block-space);
     position: absolute;
 
-    .conversation__composer__submit {
+    .conversation__submit {
       display: flex;
       flex-direction: column;
     }
   }
 
-  .conversation__composer-input {
+  .conversation__input {
     align-items: center;
     flex-grow: 1;
 

@@ -1,36 +1,19 @@
-<%= form_with(
-model: Conversation::Message.new,
-local: true,
-html: {
-  id: dom_id(conversation, :composer),
-  class: "conversation__composer",
-  data: {
-    controller: "conversation--composer",
-    conversation__composer_conversation__messages_outlet: "##{dom_id(conversation, :messages)}",
-    action: "turbo:submit-end->conversation--composer#submitEnd"
-  }
-}) do |form| %>
-  <%= form.hidden_field(
-      :client_message_id,
-      data: { conversation__composer_target: "clientMessageIdInput" }) %>
+<%= form_with model: Conversation::Message.new, local: true, id: dom_id(conversation, :composer), 
+    class: "conversation__composer",
+    data: {
+      controller: "conversation--composer",
+      conversation__composer_conversation__messages_outlet: "##{dom_id(conversation, :messages)}",
+      action: "turbo:submit-end->conversation--composer#submitEnd" } do |form| %>
 
-  <div class="conversation__composer-input">
-    <%= form.text_area(
-      :content,
-      autofocus: "on",
-      placeholder: "Ask something…",
-      rows: 1,
-      class: "input input--textarea",
-      data: { conversation__composer_target: "textInput" }) %>
+  <%= form.hidden_field :client_message_id, data: { conversation__composer_target: "clientMessageIdInput" } %>
+
+  <div class="conversation__input">
+    <%= form.text_area :content, autofocus: "on", placeholder: "Ask something…", rows: 1, 
+          class: "input input--textarea", data: { conversation__composer_target: "textInput" } %>
   </div>
 
-  <div class="conversation__composer__submit">
-    <%= form.submit(
-      "Send",
-      class: "btn",
-      data: {
-        conversation__composer_target: "submitButton",
-        action: "click->conversation--composer#submit"
-      }) %>
+  <div class="conversation__submit">
+    <%= form.submit "Send", class: "btn", data: {
+          conversation__composer_target: "submitButton", action: "click->conversation--composer#submit"} %>
   </div>
 <% end %>

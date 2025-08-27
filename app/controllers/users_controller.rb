@@ -1,12 +1,14 @@
 class UsersController < ApplicationController
   require_unauthenticated_access only: %i[ new create ]
-
+  
+  include FilterScoped
+  
   before_action :set_user, only: %i[ show edit update destroy ]
   before_action :ensure_join_code_is_valid, only: %i[ new create ]
   before_action :ensure_permission_to_change_user, only:  %i[ update destroy ]
-
-  include FilterScoped
-
+  before_action :set_filter, only: [:edit, :show]
+  before_action :set_user_filtering, only: [:edit, :show]
+  
   enable_collection_filtering only: [:edit, :show]
 
   def new

@@ -1,0 +1,18 @@
+_fixture:
+  model_class: Notification::Settings
+
+david_settings:
+  user: david
+  bundle_email_frequency: never
+
+jz_settings:
+  user: jz
+  bundle_email_frequency: never
+
+kevin_settings:
+  user: kevin
+  bundle_email_frequency: never
+
+system_settings:
+  user: system
+  bundle_email_frequency: never

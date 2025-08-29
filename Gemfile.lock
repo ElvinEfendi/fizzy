@@ -1,8 +1,8 @@
 GIT
-  remote: https://github.com/basecamp/active_record-tenanted
-  revision: f7bf7c2ba5602ed6ad842b54da7355d281d52b21
+  remote: https://github.com/basecamp/activerecord-tenanted
+  revision: 30e90f47ec7b50bf24fe169024d7360b5ea438a5
   specs:
-    active_record-tenanted (0.1.0)
+    activerecord-tenanted (0.1.0)
       activerecord (>= 8.1.alpha)
       rack-contrib (>= 2.5.0)
       railties (>= 8.1.alpha)
@@ -596,7 +596,7 @@ PLATFORMS
   x86_64-mingw32
 
 DEPENDENCIES
-  active_record-tenanted!
+  activerecord-tenanted!
   activeresource
   aws-sdk-s3
   bcrypt (~> 3.1.7)

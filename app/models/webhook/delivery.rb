@@ -2,7 +2,7 @@ class Webhook::Delivery < ApplicationRecord
   USER_AGENT = "fizzy/1.0.0 Webhook"
   ENDPOINT_TIMEOUT = 7.seconds
   DNS_RESOLUTION_TIMEOUT = 2
-  PRIVATE_IP_RANGES = [
+  DISALLOWED_IP_RANGES = [
     # IPv4 mapped to IPv6
     IPAddr.new("::ffff:0:0/96"),
     # Broadcasts
@@ -76,7 +76,7 @@ class Webhook::Delivery < ApplicationRecord
       end
 
       ip_addresses.any? do |ip|
-        ip.private? || ip.loopback? || PRIVATE_IP_RANGES.any? { |range| range.include?(ip) }
+        ip.private? || ip.loopback? || DISALLOWED_IP_RANGES.any? { |range| range.include?(ip) }
       end
     end
 

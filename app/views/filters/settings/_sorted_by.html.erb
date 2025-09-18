@@ -1,36 +1,29 @@
 <% filter = user_filtering.filter %>
 
-<%= tag.div class: class_names("quick-filter position-relative", "default-value": filter.sorted_by.latest?), 
-      data: { controller: "dialog", action: "keydown.esc->dialog#close click@document->dialog#closeOnClickOutside", filter_show: user_filtering.show_sorted_by? } do %>
-    <button class="btn input input--select flex-inline txt-x-small" data-action="click->dialog#open:stop">
-      <span class="overflow-ellipsis">
-        <%= sorted_by_label(filter.sorted_by) %>
+<%= tag.div class: class_names("quick-filter position-relative"),
+      data: {
+            controller: "dialog combobox",
+            action: "keydown.esc->dialog#close click@document->dialog#closeOnClickOutside",
+            filter_show: user_filtering.show_sorted_by? } do %>
+    <button type="button" class="btn input input--select flex-inline txt-x-small" data-action="click->dialog#toggle:stop">
+      <span class="overflow-ellipsis" data-combobox-target="label">
       </span>
     </button>
 
     <%= filter_dialog "Sort by…" do %>
       <strong class="popup__title">Sort by…</strong>
 
-      <ul class="popup__list" data-filter-target="list">
+      <ul class="popup__list" data-filter-target="list" role="listbox">
         <% Filter::SORTED_BY.each do |sort| %>
-          <li class="popup__item" data-navigable-list-target="item">
-            <%= form_with url: cards_path, method: :get, class: "full-width", data: { controller: "form" } do |form| %>
-              <% filter.as_params.except(:sorted_by).each do |key, value| %>
-                <%= filter_hidden_field_tag key, value %>
-              <% end %>
-
-              <%= hidden_field_tag :sorted_by, sort %>
-
-              <%= hidden_field_tag :expand_all, true, disabled: !user_filtering.expanded?, data: { toggle_enable_target: "element" } %>
-
-              <%= form.button type: "submit", class: "popup__btn btn" do %>
-                <span class="overflow-ellipsis flex-item-grow"><%= sorted_by_label(sort) %></span>
-                <% if filter.sorted_by == sort %>
-                  <%= icon_tag "check", class: "checked flex-item-justify-end" %>
-                <% end %>
-              <% end %>
-            <% end %>
-          </li>
+          <%= tag.li class: "popup__item", data: {
+                navigable_list_target: "item", combobox_target: "item", combobox_value: sort },
+                role: "checkbox",
+                aria: { checked: filter.sorted_by == sort } do %>
+            <button type="button" class="btn popup__btn" data-action="dialog#close combobox#change">
+              <span class="overflow-ellipsis flex-item-grow" data-combobox-label="<%= sorted_by_label(sort) %>"><%= sorted_by_label(sort) %></span>
+              <%= icon_tag "check", class: "checked flex-item-justify-end", "aria-hidden": true %>
+            </button>
+          <% end %>
         <% end %>
       </ul>
     <% end %>

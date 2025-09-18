@@ -108,7 +108,15 @@
   }
 
   .quick-filter {
-    &:not(.default-value):has(.checked) {
+    .checked {
+      display: none;
+    }
+
+    [aria-checked="true"] .checked {
+      display: block;
+    }
+
+    &:has([aria-checked="true"]) {
       .input--select {
         --input-background: var(--color-selected);
       }

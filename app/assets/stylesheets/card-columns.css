@@ -213,7 +213,7 @@
     @media (any-hover: hover) {
       .btn--circle,
       ~ .btn--circle,
-      ~ .cards__expander-menu .btn--circle {
+      ~ .cards__expander-menu .btn--circle:not(label) {
         transition: opacity 300ms ease-in-out;
         opacity: 0;
 

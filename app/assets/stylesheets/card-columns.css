@@ -6,9 +6,9 @@
     --bubble-size: 3.5rem;
     --cards-gap: min(1.2cqi, 1.7rem);
     --column-gap: 8px;
+    --column-padding-expanded: calc(var(--column-gap) * 2);
     --column-width-collapsed: 40px;
     --column-width-expanded: 450px;
-    --column-transition: 200ms ease-out;
     --progress-increment: var(--progress-max-height) / var(--progress-max-cards);
     --progress-max-cards: 20;
     --progress-max-height: 50dvh;
@@ -61,32 +61,23 @@
   .cards {
     --column-color: color-mix(in srgb, var(--card-color) 15%, var(--color-canvas));
 
-    align-items: stretch;
-    display: flex;
-    flex-direction: column;
-    gap: var(--cards-gap);
-    justify-content: start;
-    max-inline-size: var(--column-width-expanded);
-    min-inline-size: var(--column-width-expanded);
+    border-radius: calc(var(--column-width-collapsed) / 2);
+    inline-size: var(--column-width-expanded);
     position: relative;
     scroll-snap-align: start;
-    transition: var(--column-transition);
+    transition: inline-size 200ms ease-out;
+    will-change: inline-size;
 
-    /* Disable transitions during restoration */
     .no-transitions & {
       transition: none;
     }
 
-    /* Make sure filter dialogs don't end up behind sticky headers */
-    &:has([open]) {
-      z-index: 3;
+    &:not(.is-collapsed) {
+      padding-inline: var(--column-padding-expanded);
     }
 
     &.is-collapsed {
-      border-radius: calc(var(--column-width-collapsed) / 2);
-      flex: 0 0 var(--column-width-collapsed);
       inline-size: var(--column-width-collapsed);
-      min-inline-size: 0;
 
       .blank-slate,
       .pagination-link.pagination-link--active-when-observed,
@@ -99,24 +90,25 @@
       }
     }
 
-    &:not(.is-collapsed) {
-      padding-inline: calc(var(--column-gap) * 2);
-    }
-
-    .bubble {
-      inset-inline-start: 100%;
-      translate: -90% -40%;
-    }
-
     @media (any-hover: hover) {
       .card:has(.card__background img:not([src=""])):hover .card__background img:not([src=""]) {
         filter: blur(3px) brightness(1.2);
         opacity: 0.2;
       }
     }
+  }
 
-    .card__steps {
-      display: flex;
+  /* The wrapper around the cards used to clip overflow while transitioning.
+   * Also, don't resize cards while transitioning to avoid reflow. */
+  .cards__list {
+    display: grid;
+    gap: var(--cards-gap);
+    margin-inline: -1ch;
+    padding-inline: 1ch;
+    overflow: hidden;
+
+    .card {
+      inline-size: calc(var(--column-width-expanded) - var(--column-padding-expanded) * 2);
     }
   }
 
@@ -218,7 +210,7 @@
 
     .cards:not(.is-collapsed) & {
       inline-size: 100%;
-      margin-block-end: calc(-0.5 * var(--cards-gap));
+      margin-block-end: calc(0.5 * var(--cards-gap));
       justify-content: center;
     }
 
@@ -385,6 +377,10 @@
       font-size: clamp(0.6rem, 0.85cqi, 100px);
     }
 
+    .card__steps {
+      display: flex;
+    }
+
     .card__tags {
       gap: calc(var(--card-header-space) / 2);
     }
@@ -449,10 +445,6 @@
         filter: blur(3px) brightness(1.2);
         opacity: 0.2;
       }
-    }
-
-    .card__steps {
-      display: flex;
     }
   }
 

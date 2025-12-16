@@ -31,8 +31,8 @@ module Account::Billing
     def active_subscription
       if comped?
         comped_subscription
-      else
-        subscription if subscription&.active?
+      elsif subscription&.active?
+        subscription
       end
     end
 

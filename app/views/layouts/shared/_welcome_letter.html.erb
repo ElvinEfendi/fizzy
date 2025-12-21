@@ -1,4 +1,4 @@
-<div data-controller="dialog" data-action="turbo:load@window->dialog#open keydown.esc->dialog#close" data-dialog-modal-value="true">
+<div data-controller="dialog" data-dialog-auto-open-value="true" data-dialog-modal-value="true" data-action="keydown.esc->dialog#close">
   <dialog class="welcome-letter panel panel--wide shadow dialog" data-dialog-target="dialog">
     <button class="welcome-letter__close btn txt-x-small" data-action="dialog#close">
       <%= icon_tag "close" %>

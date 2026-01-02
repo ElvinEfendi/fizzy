@@ -20,7 +20,7 @@ if [ -z "$ip" ]; then
   exit 1
 fi
 
-tmp=$(mktemp /tmp/eds.json.XXXXXX)
+tmp=$(sudo mktemp /etc/envoy/eds.json.XXXXXX)
 sudo tee "$tmp" >/dev/null <<EOF
 {
   "resources": [

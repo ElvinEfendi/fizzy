@@ -24,7 +24,7 @@ sudo tee /etc/envoy/eds.json >/dev/null <<EOF
 {
   "resources": [
     {
-      "@type": "type.googleapis.com/envoy.config.cluster.v3.ClusterLoadAssignment",
+      "@type": "type.googleapis.com/envoy.config.endpoint.v3.ClusterLoadAssignment",
       "cluster_name": "fizzy_upstream",
       "endpoints": [
         {
@@ -34,7 +34,7 @@ sudo tee /etc/envoy/eds.json >/dev/null <<EOF
                 "address": {
                   "socket_address": {
                     "address": "${ip}",
-                    "port_value": 3000
+                    "port_value": 80
                   }
                 }
               }

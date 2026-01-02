@@ -26,8 +26,6 @@ env:
     - SECRET_KEY_BASE
     - VAPID_PUBLIC_KEY
     - VAPID_PRIVATE_KEY
-    - SMTP_USERNAME
-    - SMTP_PASSWORD
   clear:
     BASE_URL: http://fizzy.localdomain # The public URL of your Fizzy instance
     MAILER_FROM_ADDRESS: Fizzy <noreply@fizzy.localdomain> # The email "from" address that Fizzy sends email from

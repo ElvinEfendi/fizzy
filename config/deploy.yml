@@ -8,17 +8,17 @@ image: fizzy
 # Where to deploy fizzy
 servers:
   web:
-    - fizzy.localdomain  # Set your server name here
+    hosts:
+      - fizzy.localdomain  # Set your server name here
+    proxy: false
+    options:
+      publish:
+        - "3000:3000"
 
 # How you connect to your server
 ssh:
   user: ubuntu  # If you use a different username to SSH to your server, specify it here
   keys: ["/home/elvin/Work/home-lab/.ssh/vm-admin/key"]
-
-# Automatic SSL
-proxy:
-  ssl: false
-  host: fizzy.hl.elvinefendi.com
 
 # Your application configuration (secrets come from .kamal/secrets).
 env:

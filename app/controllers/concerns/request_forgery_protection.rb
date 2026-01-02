@@ -23,13 +23,15 @@ module RequestForgeryProtection
       ok = SAFE_FETCH_SITES.include?(value) || (value.nil? && api_request?)
 
       if !ok
-        Rails.logger.warn("[csrf] Sec-Fetch-Site rejected",
-                          sec_fetch_site: value,
-                          origin: request.headers["Origin"],
-                          referer: request.referer,
-                          user_agent: request.user_agent,
-                          path: request.fullpath,
-                          method: request.request_method)
+        Rails.logger.warn(
+          "[csrf] Sec-Fetch-Site rejected " \
+          "sec_fetch_site=#{value.inspect} " \
+          "origin=#{request.headers['Origin'].inspect} " \
+          "referer=#{request.referer.inspect} " \
+          "user_agent=#{request.user_agent.inspect} " \
+          "path=#{request.fullpath.inspect} " \
+          "method=#{request.request_method.inspect}"
+        )
       end
 
       ok

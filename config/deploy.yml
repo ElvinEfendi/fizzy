@@ -17,8 +17,8 @@ ssh:
 
 # Automatic SSL
 proxy:
-  ssl: false                # Set this to false if you *don't* want SSL
-  #host: fizzy.example.com  # Set your server name here to use automatic SSL
+  ssl: true
+  host: fizzy.hl.elvinefendi.com
 
 # Your application configuration (secrets come from .kamal/secrets).
 env:
@@ -27,13 +27,13 @@ env:
     - VAPID_PUBLIC_KEY
     - VAPID_PRIVATE_KEY
   clear:
-    BASE_URL: http://fizzy.localdomain # The public URL of your Fizzy instance
-    MAILER_FROM_ADDRESS: Fizzy <noreply@fizzy.localdomain> # The email "from" address that Fizzy sends email from
+    BASE_URL: https://fizzy.hl.elvinefendi.com # The public URL of your Fizzy instance
+    MAILER_FROM_ADDRESS: Fizzy <noreply@fizzy.hl.elvinefendi.com> # The email "from" address that Fizzy sends email from
     SMTP_ADDRESS: 192.168.1.207 # aiosmtpd on the VM
     SMTP_PORT: 1025
     MULTI_TENANT: false # Set to true to allow multiple accounts to sign up
     SOLID_QUEUE_IN_PUMA: true # Run background jobs in the app container
-    DISABLE_SSL: true
+    DISABLE_SSL: false
 
 
 #-- General configuration --#

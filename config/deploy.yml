@@ -11,9 +11,6 @@ servers:
     hosts:
       - fizzy.localdomain  # Set your server name here
     proxy: false
-    options:
-      publish:
-        - "3000:3000"
 
 # How you connect to your server
 ssh:

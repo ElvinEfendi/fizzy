@@ -1,0 +1,52 @@
+#!/usr/bin/env bash
+set -euo pipefail
+
+hosts="${KAMAL_HOSTS:-fizzy.localdomain}"
+ssh_key="/home/elvin/Work/home-lab/.ssh/vm-admin/key"
+
+for host in ${hosts//,/ } ; do
+  ssh -i "$ssh_key" -o StrictHostKeyChecking=accept-new ubuntu@"$host" 'bash -s' <<'REMOTE'
+set -euo pipefail
+
+id=$(docker ps --filter label=service=fizzy --filter label=role=web --format "{{.ID}}" | head -n1)
+if [ -z "$id" ]; then
+  echo "no fizzy web container running"
+  exit 1
+fi
+
+ip=$(docker inspect -f "{{(index .NetworkSettings.Networks "kamal").IPAddress}}" "$id")
+if [ -z "$ip" ]; then
+  echo "no kamal network ip for $id"
+  exit 1
+fi
+
+sudo tee /etc/envoy/eds.json >/dev/null <<EOF
+{
+  "resources": [
+    {
+      "@type": "type.googleapis.com/envoy.config.cluster.v3.ClusterLoadAssignment",
+      "cluster_name": "fizzy_upstream",
+      "endpoints": [
+        {
+          "lb_endpoints": [
+            {
+              "endpoint": {
+                "address": {
+                  "socket_address": {
+                    "address": "${ip}",
+                    "port_value": 3000
+                  }
+                }
+              }
+            }
+          ]
+        }
+      ]
+    }
+  ]
+}
+EOF
+sudo chmod 644 /etc/envoy/eds.json
+REMOTE
+
+done

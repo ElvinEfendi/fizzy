@@ -14,7 +14,7 @@ if [ -z "$id" ]; then
   exit 1
 fi
 
-ip=$(docker inspect -f "{{(index .NetworkSettings.Networks "kamal").IPAddress}}" "$id")
+ip=$(docker inspect -f '{{(index .NetworkSettings.Networks "kamal").IPAddress}}' "$id")
 if [ -z "$ip" ]; then
   echo "no kamal network ip for $id"
   exit 1

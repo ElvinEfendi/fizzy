@@ -20,7 +20,8 @@ if [ -z "$ip" ]; then
   exit 1
 fi
 
-sudo tee /etc/envoy/eds.json >/dev/null <<EOF
+tmp=$(mktemp /tmp/eds.json.XXXXXX)
+sudo tee "$tmp" >/dev/null <<EOF
 {
   "resources": [
     {
@@ -46,7 +47,8 @@ sudo tee /etc/envoy/eds.json >/dev/null <<EOF
   ]
 }
 EOF
-sudo chmod 644 /etc/envoy/eds.json
+sudo chmod 644 "$tmp"
+sudo mv "$tmp" /etc/envoy/eds.json
 REMOTE
 
 done

@@ -20,21 +20,7 @@ module RequestForgeryProtection
 
     def safe_fetch_site?
       value = sec_fetch_site_value
-      ok = SAFE_FETCH_SITES.include?(value) || (value.nil? && api_request?)
-
-      if !ok
-        Rails.logger.warn(
-          "[csrf] Sec-Fetch-Site rejected " \
-          "sec_fetch_site=#{value.inspect} " \
-          "origin=#{request.headers['Origin'].inspect} " \
-          "referer=#{request.referer.inspect} " \
-          "user_agent=#{request.user_agent.inspect} " \
-          "path=#{request.fullpath.inspect} " \
-          "method=#{request.request_method.inspect}"
-        )
-      end
-
-      ok
+      SAFE_FETCH_SITES.include?(value) || (value.nil? && api_request?)
     end
 
     def api_request?
